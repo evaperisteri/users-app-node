@@ -24,3 +24,18 @@ exports.login = async(req, res)=> {
     res.status(400).json({status:false, data:err})
  }
 }
+
+exports.googleLogin = async(req, res)=> {
+  const code = req.query.code;
+  if(!code){
+    res.status(400).json({status:false, data: "authorization code is missing"});
+  } else {
+    let user = await authService.googleAuth(code);
+    if(user) {
+      console.log(">>>", user);
+      res.status(200).json({status: true, data: user});
+    }else {
+      res.status(400).json({status: false, data: "Problem in google login"})
+    }
+  }
+}
