@@ -27,7 +27,8 @@
 //   transports: [new transports.Console()]
 // })
 
-
+// for jest test
+//require('dotenv').config();
 
 //THIRD EXAMPLE
 require('winston-daily-rotate-file');

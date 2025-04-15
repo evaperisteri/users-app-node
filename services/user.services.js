@@ -9,4 +9,17 @@ function findOne(username){
 const result = User.findOne({username:username});
 return result;
 }
-module.exports = {findAll, findOne}
+
+async function findLastInsertedUser(){
+console.log("find last inserted user");
+try{
+  const result = await User.find().sort({_id:-1}).limit(1);
+  console.log("Success in finding lst inserted user", result[0].username);
+  return result[0]
+} catch (err) {
+  console.log("problem in finding last inserted user", err)
+  return false
+}
+}
+
+module.exports = {findAll, findOne, findLastInsertedUser}
